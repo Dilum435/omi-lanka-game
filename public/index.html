@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#09281f">
+  <meta name="description" content="Play traditional Sri Lankan Omi online with friends or clever bots. Free, no registration.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <title>OMI Lanka — ඕමි</title>
+</head>
+<body>
+  <div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div>
+  <main id="home-screen" class="screen home-screen">
+    <header class="site-header wrap">
+      <div class="brand"><div class="brand-mark">♠</div><span>OMI<span class="brand-thin">LANKA</span><small>ශ්‍රී ලංකා ඕමි</small></span></div>
+      <button class="top-quiet" data-help="true">How to play <span>↗</span></button>
+    </header>
+    <div class="hero wrap">
+      <section class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> THE CLASSIC SRI LANKAN CARD GAME</div>
+        <h1>Deal the cards.<br><em>Own the table.</em></h1>
+        <p class="hero-desc">Four players. Two teams. One legendary game. Call trumps, outplay your rivals, and go for <strong>Kapothi.</strong></p>
+        <div class="entry-panel">
+          <label for="player-name" class="field-label">YOUR PLAYER NAME</label>
+          <input id="player-name" type="text" maxlength="20" placeholder="Enter your name" autocomplete="nickname" spellcheck="false">
+          <button id="solo-btn" class="btn btn-gold btn-large"><span>♠</span> Play vs Computer <span class="btn-arrow">→</span></button>
+          <div class="button-row"><button id="create-btn" class="btn btn-outline">Create friend room</button><button id="join-open-btn" class="btn btn-outline">Join a room</button></div>
+          <div id="join-fields" class="join-fields" hidden><label for="join-code" class="field-label">6-CHARACTER ROOM CODE</label><div class="join-line"><input id="join-code" type="text" maxlength="6" placeholder="E.g. ABC123" autocapitalize="characters" spellcheck="false"><button id="join-btn" class="btn btn-green">Join →</button></div></div>
+          <p class="entry-note">✦ No downloads. No account. Just Omi.</p>
+        </div>
+      </section>
+      <section class="hero-art" aria-label="Four playing cards on a green Omi table">
+        <div class="art-ring ring-one"></div><div class="art-ring ring-two"></div>
+        <div class="art-badge badge-top">EST. IN EVERY <strong>SRI LANKAN HOME</strong></div>
+        <div class="showcard showcard-left"><span class="sc-corner">A<br>♠</span><strong>♠</strong><span class="sc-foot">A<br>♠</span></div>
+        <div class="showcard showcard-mid"><span class="sc-corner">K<br>♥</span><strong>♥</strong><span class="sc-foot">K<br>♥</span></div>
+        <div class="showcard showcard-right"><span class="sc-corner">Q<br>♣</span><strong>♣</strong><span class="sc-foot">Q<br>♣</span></div>
+        <div class="art-badge badge-bottom">YOUR NEXT <strong>KAPOTHI</strong> STARTS HERE <span>✦</span></div>
+        <span class="tiny-star star-1">✦</span><span class="tiny-star star-2">✦</span>
+      </section>
+    </div>
+    <footer class="home-footer wrap"><div>♣ 32 CARDS <span class="sep">•</span> ♥ 4 PLAYERS <span class="sep">•</span> ♠ 8 TRICKS</div><span>MADE FOR THE LOVE OF THE GAME <span class="lanka-heart">♥</span></span></footer>
+  </main>
+
+  <main id="lobby-screen" class="screen" hidden>
+    <header class="inner-header wrap"><div class="brand brand-small"><div class="brand-mark">♠</div><span>OMI<span class="brand-thin">LANKA</span></span></div><button class="top-quiet" data-help="true">Rules ↗</button></header>
+    <div class="lobby-wrap wrap">
+      <div class="eyebrow"><span class="live-dot"></span> PRIVATE FRIEND TABLE</div>
+      <h2>Your table is ready.</h2><p class="muted">Share the code with friends. Empty seats become computer players when the host starts.</p>
+      <div class="room-invite"><div><small>ROOM INVITE CODE</small><strong id="lobby-code">———</strong></div><button id="copy-link" class="btn btn-gold">Copy invite link ↗</button></div>
+      <div class="lobby-grid" id="lobby-grid"></div>
+      <div class="team-key"><span><i class="team-circle sun"></i> Gold team: seats 1 & 3</span><span><i class="team-circle blue"></i> Teal team: seats 2 & 4</span></div>
+      <div class="lobby-actions"><button id="start-btn" class="btn btn-gold btn-large">Start game with bots →</button><p id="waiting-host" class="muted" hidden>Waiting for the host to start the match…</p></div>
+    </div>
+  </main>
+
+  <main id="game-screen" class="screen" hidden>
+    <header class="game-header">
+      <div class="game-header-left"><div class="brand brand-small"><div class="brand-mark">♠</div><span>OMI<span class="brand-thin">LANKA</span></span></div><div class="room-pill">ROOM <strong id="header-code">—</strong><button id="game-copy" aria-label="Copy invite">⧉</button></div></div>
+      <div class="header-actions"><button id="sound-toggle" title="Toggle sound" aria-label="Toggle sound">♫</button><button data-help="true" title="How to play" aria-label="How to play">?</button></div>
+    </header>
+    <div class="game-layout">
+      <section class="board-column">
+        <div class="score-strip">
+          <div class="score-team score-team-gold"><span class="team-symbol">✦</span><div><small>GOLD TEAM</small><strong id="score-gold">0</strong><span class="score-goal"> / 10</span></div></div>
+          <div class="score-middle"><div class="round-caption">HAND <strong id="hand-num">1</strong> <span>•</span> <span id="trick-num">TRICK 1 OF 8</span></div><div id="turn-status" class="turn-status">The game is beginning...</div></div>
+          <div class="score-team score-team-teal"><div><small>TEAL TEAM</small><strong id="score-teal">0</strong><span class="score-goal"> / 10</span></div><span class="team-symbol">✧</span></div>
+        </div>
+        <div class="table-shell">
+          <div class="felt-table">
+            <div class="felt-decoration">♠ <span>O M I</span> ♣</div>
+            <div id="seat-top" class="player-position player-top"></div>
+            <div id="seat-left" class="player-position player-left"></div>
+            <div id="seat-right" class="player-position player-right"></div>
+            <div class="center-field">
+              <div class="table-center-meta"><span id="trump-chip">TRUMP <b>—</b></span><span id="trick-score-chip">TRICKS 0–0</span></div>
+              <div id="played-cards" class="played-cards"><span class="table-watermark">♠</span></div>
+              <div id="last-trick-notice" class="last-trick-notice"></div>
+            </div>
+            <div id="seat-bottom" class="player-position player-bottom"></div>
+          </div>
+        </div>
+        <div class="hand-panel"><div class="hand-topline"><span id="hand-label">YOUR HAND <b>• 8 CARDS</b></span><span id="hand-hint">Choose a card to play</span></div><div id="my-hand" class="my-hand"></div></div>
+        <div class="action-bar"><span id="bonus-notice">WIN THE HAND. CLAIM THE TOKENS.</span><div class="reactions"><span>REACT</span><button data-emoji="👏" aria-label="Clap">👏</button><button data-emoji="🔥" aria-label="Fire">🔥</button><button data-emoji="😎" aria-label="Cool">😎</button><button data-emoji="😂" aria-label="Laugh">😂</button><button data-emoji="👍" aria-label="Thumbs up">👍</button><button data-emoji="😮" aria-label="Wow">😮</button></div></div>
+      </section>
+      <aside class="sidebar">
+        <div class="sidebar-head"><div class="eyebrow">THE SCOREBOARD</div><h3>Game details <span>✦</span></h3></div>
+        <div class="side-section"><small class="side-label">TEAMS</small><div id="team-details"></div></div>
+        <div class="side-section"><small class="side-label">GAME STATUS</small><div class="side-row"><span>Trump suit</span><strong id="side-trump">Not chosen</strong></div><div class="side-row"><span>Dealer</span><strong id="side-dealer">—</strong></div><div class="side-row"><span>Next token bonus</span><strong id="side-bonus">+0</strong></div></div>
+        <div class="side-section activity-section"><small class="side-label">MATCH ACTIVITY</small><div id="activity-log" class="activity-log"></div></div>
+        <div class="side-footer">OMI • ඕමි <span>Made to play together.</span></div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="trump-overlay" class="overlay" hidden><div class="modal trump-modal" role="dialog" aria-modal="true" aria-label="Select trump suit"><div class="modal-ornament">✦</div><div class="eyebrow">YOU'RE THE TRUMP CALLER</div><h2>Choose your trump.</h2><p>The suit you pick will outrank all other suits this hand. Choose from your first four cards.</p><div id="trump-preview" class="trump-preview"></div><div id="suit-buttons" class="suit-buttons"><button data-suit="S" class="suit-button black">♠ <small>SPADES</small></button><button data-suit="H" class="suit-button red">♥ <small>HEARTS</small></button><button data-suit="D" class="suit-button red">♦ <small>DIAMONDS</small></button><button data-suit="C" class="suit-button black">♣ <small>CLUBS</small></button></div></div></div>
+  <div id="result-overlay" class="overlay" hidden><div class="modal result-modal" role="dialog" aria-modal="true" aria-label="Round results"><div class="modal-ornament">✦</div><div id="result-eyebrow" class="eyebrow">HAND COMPLETE</div><h2 id="result-title">What a hand.</h2><p id="result-subtitle">The scores are in.</p><div class="result-grid"><div><small>GOLD TEAM</small><strong id="result-gold">0</strong><span>TRICKS WON</span></div><div><small>TEAL TEAM</small><strong id="result-teal">0</strong><span>TRICKS WON</span></div></div><div id="result-award" class="award-note"></div><button id="next-btn" class="btn btn-gold btn-large">Deal next hand →</button><p id="result-wait" class="muted" hidden>Waiting for the host to deal the next hand…</p></div></div>
+  <div id="help-overlay" class="overlay" hidden><div class="modal help-modal" role="dialog" aria-modal="true" aria-label="How to play Omi"><button id="close-help" class="modal-close" aria-label="Close rules">✕</button><div class="eyebrow">THE REAL SRI LANKAN RULES</div><h2>How to play <em>Omi.</em></h2><div class="rules-list"><section><span>01</span><div><h3>Four players, two teams</h3><p>Partners sit opposite. Gold (seats 1 & 3) plays Teal (seats 2 & 4). Deal and play move counterclockwise.</p></div></section><section><span>02</span><div><h3>Only 32 cards</h3><p>Use 7, 8, 9, 10, J, Q, K, A of all four suits. Ace is highest. Everyone receives four cards first.</p></div></section><section><span>03</span><div><h3>Pick trumps</h3><p>The player to the dealer's right selects a trump suit from their first four cards. Everyone receives four more cards (8 total). The trump caller leads.</p></div></section><section><span>04</span><div><h3>Win the trick</h3><p>You MUST follow the led suit if you have it. Otherwise play any card. The highest trump wins, or if none was played, the highest card of the led suit. Trick winner leads next.</p></div></section><section><span>05</span><div><h3>Score tokens</h3><p>Trump-calling team wins 5–7 tricks: <b>1 token.</b> Defending team wins 5–7: <b>2 tokens.</b> All 8 tricks: <b>3 tokens (Kapothi).</b> A 4–4 draw adds a bonus token to the next decisive hand. First team to 10 wins.</p></div></section></div><div class="help-note">This edition follows classic, automatic-Kapothi rules. Some families play extra announced-Kapothi variations.</div><button id="help-done" class="btn btn-gold">Got it — let's play →</button></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
